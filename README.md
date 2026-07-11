@@ -38,7 +38,7 @@ RecollectViewer Lite focuses on "viewing." For power users who need advanced fea
 *   **Global Compatibility:** Handles path resolutions and date formatting (ISO 8601) regardless of your system's region settings.
 
 ## 📥 How to Use
-1. Download the latest release from the [Releases page](https://github.com/your-username/your-repo/releases).
+1. Download the latest release from the [Releases page]([https://github.com/your-username/your-repo/releases](https://github.com/y-tomioka/RecollectViewerLite/releases)).
 2. Run the `RecollectViewerLite.exe`.
 3. Select your Google Takeout data folder.
 4. Enjoy your chat history in a tree view!
