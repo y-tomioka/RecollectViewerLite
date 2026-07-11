@@ -121,12 +121,12 @@ namespace AIChatViewer
                     // ==========================================
                     const btn = document.createElement('button');
                     btn.className = 'copy-btn';
-                    btn.innerText = 'コピー';
+                    btn.innerText = 'Copy';
                     btn.addEventListener('click', () => {
                         const textToCopy = codeBlock ? codeBlock.innerText : pre.innerText;
                         navigator.clipboard.writeText(textToCopy).then(() => {
-                            btn.innerText = 'コピーしました！';
-                            setTimeout(() => { btn.innerText = 'コピー'; }, 2000);
+                            btn.innerText = 'Copied!';
+                            setTimeout(() => { btn.innerText = 'Copy'; }, 2000);
                         });
                     });
                     pre.appendChild(btn);
@@ -136,7 +136,7 @@ namespace AIChatViewer
             sb.AppendLine("</head>");
 
             sb.AppendLine("<body style='font-family: Meiryo, sans-serif; padding: 20px; background-color: #f0f2f5;'>");
-            sb.AppendLine($"<h2 style='color: #333;'>{nodeData.date} の相談一覧 ({nodeData.count}件)</h2>");
+            sb.AppendLine($"<h2 style='color: #333;'>{nodeData.date} - Conversations ({nodeData.count} items)</h2>");
             sb.AppendLine("<hr style='border: 1px solid #ccc; margin-bottom: 20px;'>");
 
             // ―― 相談内容をループして一覧化 ――
@@ -144,7 +144,7 @@ namespace AIChatViewer
             {
                 // 時間とタイトルの取得（タイトルが空なら「タイトルなし」とする）
                 string timeStr = item.Time.ToLocalTime().ToString("yyyy/MM/dd HH:mm");
-                string title = string.IsNullOrEmpty(item.Title) ? "タイトルなし" : item.Title.Replace("送信したメッセージ:", "");
+                string title = string.IsNullOrEmpty(item.Title) ? "(No title)" : item.Title.Replace("送信したメッセージ:", "");
                 title = title.Replace("\r\n", "<br>").Replace("\n", "<br>").Replace(" ", "&nbsp;");
 
                 // ★ここからが「折りたたみUI」の魔法（detailsタグ）
@@ -199,7 +199,7 @@ namespace AIChatViewer
                     System.Diagnostics.Debug.WriteLine($"[makeGeminiHtml] rawLen={rawHtml?.Length ?? -1} cleanLen={cleanHtml?.Length ?? -1} textLen={cleanText.Length}");
                     if (string.IsNullOrWhiteSpace(cleanText))
                     {
-                        sb.AppendLine("<p style='color: #999; font-style: italic;'>テキスト回答なし</p>");
+                        sb.AppendLine("<p style='color: #999; font-style: italic;'>No text response</p>");
                     }
                     else
                     {
@@ -208,7 +208,7 @@ namespace AIChatViewer
                 }
                 else
                 {
-                    sb.AppendLine("<p style='color: #999; font-style: italic;'>テキスト回答なし</p>");
+                    sb.AppendLine("<p style='color: #999; font-style: italic;'>No text response</p>");
                 }
                 sb.AppendLine("  </div>");
 

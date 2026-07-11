@@ -25,26 +25,26 @@ namespace AIChatViewer
             var yearList = geminiConverter.getYearTreeData(geminidata);
             foreach (var yearItem in yearList)
             {
-                // ノードのテキストは "2026年 (30件)" のようにする
-                TreeNode yearNode = new TreeNode($"{yearItem.date} ({yearItem.count}件)");
+                // ノードのテキストは "2026 (30 items)" のようにする
+                TreeNode yearNode = new TreeNode($"{yearItem.date} ({yearItem.count} items)");
                 // 後で検索やWebView連携で使えるように、裏側(Tag)に元データを丸ごと持たせておく
                 yearNode.Tag = yearItem;
                 rootNode.Nodes.Add(yearNode);
 
-                // dateプロパティ("2026年")から数字だけ取り出してDateTimeを作る（次の月検索のため）
-                int year = int.Parse(yearItem.date.Replace("年", ""));
+                // dateプロパティ("2026")から数字だけ取り出してDateTimeを作る（次の月検索のため）
+                int year = int.Parse(yearItem.date);
                 DateTime dummyYearDate = new DateTime(year, 1, 1);
 
                 // 3. 月の階層を作成
                 var monthList = geminiConverter.getMonthTreeData(dummyYearDate, geminidata);
                 foreach (var monthItem in monthList)
                 {
-                    TreeNode monthNode = new TreeNode($"{monthItem.date} ({monthItem.count}件)");
+                    TreeNode monthNode = new TreeNode($"{monthItem.date} ({monthItem.count} items)");
                     monthNode.Tag = monthItem;
                     yearNode.Nodes.Add(monthNode);
 
-                    // dateプロパティ("2026年4月")から月の数字だけ取り出す
-                    string monthStr = monthItem.date.Replace($"{year}年", "").Replace("月", "");
+                    // dateプロパティ("2026-04")から月の数字だけ取り出す
+                    string monthStr = monthItem.date.Split('-')[1];
                     int month = int.Parse(monthStr);
                     DateTime dummyMonthDate = new DateTime(year, month, 1);
 
@@ -52,7 +52,7 @@ namespace AIChatViewer
                     var dayList = geminiConverter.getDayTreeData(dummyMonthDate, geminidata);
                     foreach (var dayItem in dayList)
                     {
-                        TreeNode dayNode = new TreeNode($"{dayItem.date} ({dayItem.count}件)");
+                        TreeNode dayNode = new TreeNode($"{dayItem.date} ({dayItem.count} items)");
                         dayNode.Tag = dayItem;
                         monthNode.Nodes.Add(dayNode);
                     }

@@ -43,9 +43,9 @@ namespace AIChatViewer
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
                 // 1. JSONファイルのみを表示・選択できるようにフィルターを設定
-                openFileDialog.Filter = "JSONファイル (*.json)|*.json";
+                openFileDialog.Filter = "JSON Files (*.json)|*.json";
                 openFileDialog.FilterIndex = 1; // デフォルトで「JSONファイル」を選択状態にする
-                openFileDialog.Title = "Geminiの履歴データ(JSON)を選択してください";
+                openFileDialog.Title = "Select Gemini History Data (JSON)";
                 openFileDialog.RestoreDirectory = true; // 前回開いたディレクトリを記憶する
 
                 // 2. ダイアログを表示し、ユーザーが[OK]を押したか判定

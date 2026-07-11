@@ -69,7 +69,7 @@
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(910, 638);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "ツリー";
+            this.tabPage1.Text = "Tree";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // splitContainer1
@@ -131,7 +131,7 @@
             // 
             this.設定ToolStripMenuItem.Name = "設定ToolStripMenuItem";
             this.設定ToolStripMenuItem.Size = new System.Drawing.Size(64, 29);
-            this.設定ToolStripMenuItem.Text = "設定";
+            this.設定ToolStripMenuItem.Text = "Settings";
             this.設定ToolStripMenuItem.Click += new System.EventHandler(this.設定ToolStripMenuItem_Click);
             // 
             // ヘルプToolStripMenuItem
@@ -141,20 +141,20 @@
             this.アップデート確認ToolStripMenuItem});
             this.ヘルプToolStripMenuItem.Name = "ヘルプToolStripMenuItem";
             this.ヘルプToolStripMenuItem.Size = new System.Drawing.Size(72, 29);
-            this.ヘルプToolStripMenuItem.Text = "ヘルプ";
+            this.ヘルプToolStripMenuItem.Text = "Help";
             // 
             // バージョン情報ToolStripMenuItem
             // 
             this.バージョン情報ToolStripMenuItem.Name = "バージョン情報ToolStripMenuItem";
             this.バージョン情報ToolStripMenuItem.Size = new System.Drawing.Size(227, 34);
-            this.バージョン情報ToolStripMenuItem.Text = "バージョン情報";
+            this.バージョン情報ToolStripMenuItem.Text = "About";
             this.バージョン情報ToolStripMenuItem.Click += new System.EventHandler(this.バージョン情報ToolStripMenuItem_Click);
             // 
             // アップデート確認ToolStripMenuItem
             // 
             this.アップデート確認ToolStripMenuItem.Name = "アップデート確認ToolStripMenuItem";
             this.アップデート確認ToolStripMenuItem.Size = new System.Drawing.Size(227, 34);
-            this.アップデート確認ToolStripMenuItem.Text = "アップデート確認";
+            this.アップデート確認ToolStripMenuItem.Text = "Check for Updates";
             this.アップデート確認ToolStripMenuItem.Click += new System.EventHandler(this.アップデート確認ToolStripMenuItem_Click);
             // 
             // Form1
@@ -166,7 +166,7 @@
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
-            this.Text = "RecollectViewer Lite- AIチャット履歴の統合検索ソフト";
+            this.Text = "RecollectViewer Lite - Unified AI Chat History Viewer";
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);

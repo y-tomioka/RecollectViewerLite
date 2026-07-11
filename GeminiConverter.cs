@@ -89,8 +89,8 @@ namespace AIChatViewer
                 .OrderByDescending(g => g.Key)
                 .Select(g => new TreeNodeData
                 {
-                    // 例: "2026年"
-                    date = $"{g.Key}年",
+                    // 例: "2026"
+                    date = $"{g.Key}",
                     count = g.Count(),
                     Items = g.ToList()
                 }).ToList();
@@ -105,8 +105,8 @@ namespace AIChatViewer
                 .OrderByDescending(g => g.Key)
                 .Select(g => new TreeNodeData
                 {
-                    // 引数で渡された「年」を使って "2026年4月" のようにする
-                    date = $"{date.Year}年{g.Key}月",
+                    // 引数で渡された「年」を使って "2026-04" のようにする
+                    date = $"{date.Year}-{g.Key:D2}",
                     count = g.Count(),
                     Items = g.ToList()
                 }).ToList();
@@ -122,8 +122,8 @@ namespace AIChatViewer
                 .OrderByDescending(g => g.Key)
                 .Select(g => new TreeNodeData
                 {
-                    // 引数で渡された「年」「月」を使って "2026年4月6日" のようにする
-                    date = $"{date.Year}年{date.Month}月{g.Key}日",
+                    // 引数で渡された「年」「月」を使って "2026-04-06" のようにする
+                    date = $"{date.Year}-{date.Month:D2}-{g.Key:D2}",
                     count = g.Count(),
                     Items = g.ToList()
                 }).ToList();

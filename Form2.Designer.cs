@@ -60,7 +60,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(85, 34);
             this.button1.TabIndex = 2;
-            this.button1.Text = "参照";
+            this.button1.Text = "Browse";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -70,7 +70,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(110, 40);
             this.button2.TabIndex = 3;
-            this.button2.Text = "キャンセル";
+            this.button2.Text = "Cancel";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -80,7 +80,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(106, 40);
             this.button3.TabIndex = 4;
-            this.button3.Text = "設定";
+            this.button3.Text = "Save";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -90,7 +90,7 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(85, 34);
             this.button5.TabIndex = 8;
-            this.button5.Text = "クリア";
+            this.button5.Text = "Clear";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -108,7 +108,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(537, 250);
             this.Name = "Form2";
-            this.Text = "JSON設定";
+            this.Text = "JSON Settings";
             this.ResumeLayout(false);
             this.PerformLayout();
 
