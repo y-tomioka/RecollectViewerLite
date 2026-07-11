@@ -112,6 +112,13 @@ namespace AIChatViewer
             }
             .answer-content p { line-height: 1.6; }
             .answer-content code:not(pre code) { background-color: #e9ecef; padding: 2px 4px; border-radius: 3px; color: #d63384; font-family: Consolas, monospace; }
+            details { overflow-wrap: break-word; word-wrap: break-word; }
+            details summary {
+                overflow-wrap: break-word;
+                word-wrap: break-word;
+                white-space: normal;
+            }
+            .answer-content { overflow-wrap: break-word; word-wrap: break-word; }
         </style>");
 
                 sb.AppendLine(@"<script>
@@ -155,13 +162,14 @@ namespace AIChatViewer
                 // 時間とタイトルの取得（タイトルが空なら「タイトルなし」とする）
                 string timeStr = item.Time.ToLocalTime().ToString("yyyy/MM/dd HH:mm");
                 string title = string.IsNullOrEmpty(item.Title) ? "(No title)" : StripGeminiTitlePrefix(item.Title);
-                title = title.Replace("\r\n", "<br>").Replace("\n", "<br>").Replace(" ", "&nbsp;");
+                title = WebUtility.HtmlEncode(title);
+                title = title.Replace("\r\n", "<br>").Replace("\n", "<br>");
 
                 // ★ここからが「折りたたみUI」の魔法（detailsタグ）
                 sb.AppendLine("<details style='margin-bottom: 15px; background-color: #f8f9fa; padding: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);'>");
 
                 // クリックできるタイトル部分（summaryタグ）
-                sb.AppendLine($"  <summary style='cursor: pointer; font-size: 1.1em; font-weight: bold; color: #333333;'>");
+                sb.AppendLine("  <summary style='cursor: pointer; font-size: 1.1em; font-weight: bold; color: #333333; overflow-wrap: break-word; word-wrap: break-word; white-space: normal;'>");
                 sb.AppendLine($"    <font color=lightblue;>[{timeStr}]</font> {title}");
                 sb.AppendLine($"  </summary>");
 
