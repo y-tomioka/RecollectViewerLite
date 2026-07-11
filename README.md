@@ -43,6 +43,7 @@ RecollectViewer Lite focuses on "viewing." For power users who need advanced fea
 3. Select your Google Takeout data folder.
 4. Enjoy your chat history in a tree view!
 <img width="1920" height="1128" alt="image" src="https://github.com/user-attachments/assets/8ad7c090-7cf4-4b6c-b6b7-ae8db93c4946" />
+<img width="1920" height="1128" alt="image" src="https://github.com/user-attachments/assets/1f8aa719-411c-4cfe-8ac6-a65239b45c2e" />
 
 
 
