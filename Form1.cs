@@ -229,7 +229,7 @@ namespace AIChatViewer
 
         private void バージョン情報ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("RecollectViewer Lite ver:0.1");
+            MessageBox.Show("RecollectViewer Lite ver:1.0");
         }
 
         // =========================================================
