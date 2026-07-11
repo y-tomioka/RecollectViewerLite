@@ -14,6 +14,16 @@ namespace AIChatViewer
     {
         private static string m_cssContent = "";
         private static string m_jsContent = "";
+
+        private static readonly string[] GeminiTitlePrefixes = new[]
+        {
+            "送信したメッセージ:",
+            "Sent message:",
+            "Prompt sent:",
+            "Message sent:",
+            "フィードバックを送信しました:",
+            "Feedback sent:",
+        };
         public HTMLGenerator()
         {
             // 実行ファイル（.exe）があるフォルダのパスを取得
@@ -135,7 +145,7 @@ namespace AIChatViewer
         </script>");
             sb.AppendLine("</head>");
 
-            sb.AppendLine("<body style='font-family: Meiryo, sans-serif; padding: 20px; background-color: #f0f2f5;'>");
+            sb.AppendLine("<body style='font-family: Segoe UI, system-ui, sans-serif; padding: 20px; background-color: #f0f2f5;'>");
             sb.AppendLine($"<h2 style='color: #333;'>{nodeData.date} - Conversations ({nodeData.count} items)</h2>");
             sb.AppendLine("<hr style='border: 1px solid #ccc; margin-bottom: 20px;'>");
 
@@ -144,7 +154,7 @@ namespace AIChatViewer
             {
                 // 時間とタイトルの取得（タイトルが空なら「タイトルなし」とする）
                 string timeStr = item.Time.ToLocalTime().ToString("yyyy/MM/dd HH:mm");
-                string title = string.IsNullOrEmpty(item.Title) ? "(No title)" : item.Title.Replace("送信したメッセージ:", "");
+                string title = string.IsNullOrEmpty(item.Title) ? "(No title)" : StripGeminiTitlePrefix(item.Title);
                 title = title.Replace("\r\n", "<br>").Replace("\n", "<br>").Replace(" ", "&nbsp;");
 
                 // ★ここからが「折りたたみUI」の魔法（detailsタグ）
@@ -160,37 +170,7 @@ namespace AIChatViewer
                 sb.AppendLine("  <div class='answer-content' style='margin-top: 15px; padding-top: 15px; border-top: 1px dashed #eee; background-color: white;'>");
                 if (item.SafeHtmlItems != null && item.SafeHtmlItems.Length > 0)
                 {
-                    // ==========================================================
-                    // ▼▼ ここに【添付ファイル】のHTML生成コードを追加します ▼▼
-                    // ==========================================================
-                    if (item.Subtitles != null) // nullチェックをしておくと安全です
-                    {
-                        for (int i = 0; i < item.Subtitles.Count(); i++)
-                        {
-                            if (item.Subtitles[0].Name.Contains("添付ファイル") == false)
-                            {
-                                continue;
-                            }
-                            if (i > 0)
-                            {
-                                string jsonDir = System.IO.Path.GetDirectoryName(path);
-                                Subtitle subtitle = item.Subtitles[i];
-                                {
-                                    // JavaScriptに渡すためにパスの「\」を「\\」にエスケープする
-                                    string fullPath = System.IO.Path.Combine(jsonDir, subtitle.Url);
-                                    string escapedUrl = fullPath.Replace("\\", "\\\\");
-
-                                    // メッセージ本文の少し下（margin-top: 8px）にリンクを配置します
-                                    sb.AppendLine($"<div style='margin-top: 8px;'>");
-                                    //sb.AppendLine($"  <a href='#' onclick=\"window.chrome.webview.postMessage('{escapedUrl}'); return false;\" style='color: #0056b3; text-decoration: underline; cursor: pointer; font-size: 0.9em;'>");
-                                    sb.AppendLine($"  <a href='#' onclick=\"window.chrome.webview.postMessage('GEMINI:{escapedUrl}'); return false;\" ...>");
-                                    sb.AppendLine($"    📎 {subtitle.Name}");
-                                    sb.AppendLine($"  </a>");
-                                    sb.AppendLine($"</div>");
-                                }
-                            }
-                        }
-                    }
+                    AppendAttachmentLinks(sb, item, path);
 
                     //sb.AppendLine(item.SafeHtmlItems[0].Html);
                     string rawHtml = item.SafeHtmlItems[0].Html;
@@ -302,6 +282,64 @@ namespace AIChatViewer
                 }
             }
             return false;
+        }
+
+        private static string StripGeminiTitlePrefix(string title)
+        {
+            foreach (string prefix in GeminiTitlePrefixes)
+            {
+                if (title.StartsWith(prefix, StringComparison.OrdinalIgnoreCase))
+                {
+                    return title.Substring(prefix.Length).TrimStart();
+                }
+            }
+            return title;
+        }
+
+        private static string GetAttachmentDisplayName(Class1 item, string fileName)
+        {
+            Subtitle matched = item.Subtitles?.FirstOrDefault(s =>
+                !string.IsNullOrEmpty(s.Url) &&
+                string.Equals(s.Url, fileName, StringComparison.OrdinalIgnoreCase));
+
+            if (matched != null && !string.IsNullOrWhiteSpace(matched.Name))
+            {
+                string name = matched.Name.Trim();
+                if (name.StartsWith("-"))
+                {
+                    name = name.TrimStart('-').Trim();
+                }
+                return name;
+            }
+
+            return System.IO.Path.GetFileName(fileName);
+        }
+
+        private static void AppendAttachmentLinks(StringBuilder sb, Class1 item, string jsonPath)
+        {
+            if (item.AttachedFiles == null || item.AttachedFiles.Length == 0)
+            {
+                return;
+            }
+
+            string jsonDir = System.IO.Path.GetDirectoryName(jsonPath);
+            foreach (string fileName in item.AttachedFiles)
+            {
+                if (string.IsNullOrWhiteSpace(fileName))
+                {
+                    continue;
+                }
+
+                string fullPath = System.IO.Path.Combine(jsonDir, fileName);
+                string escapedUrl = fullPath.Replace("\\", "\\\\");
+                string displayName = WebUtility.HtmlEncode(GetAttachmentDisplayName(item, fileName));
+
+                sb.AppendLine("<div style='margin-top: 8px;'>");
+                sb.AppendLine($"  <a href='#' onclick=\"window.chrome.webview.postMessage('GEMINI:{escapedUrl}'); return false;\" style='color: #0056b3; text-decoration: underline; cursor: pointer; font-size: 0.9em;'>");
+                sb.AppendLine($"    📎 {displayName}");
+                sb.AppendLine("  </a>");
+                sb.AppendLine("</div>");
+            }
         }
 
     }

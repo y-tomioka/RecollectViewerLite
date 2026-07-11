@@ -48,7 +48,7 @@ namespace AIChatViewer
             // ★追加：起動時の初期メッセージ（ウェルカム画面）
             // ==========================================
             string treeHtml = @"
-                <!DOCTYPE html><html><body style='font-family: Meiryo, sans-serif; display: flex; justify-content: center; align-items: center; height: 90vh; background-color: #f8f9fa; color: #555;'>
+                <!DOCTYPE html><html><body style='font-family: Segoe UI, system-ui, sans-serif; display: flex; justify-content: center; align-items: center; height: 90vh; background-color: #f8f9fa; color: #555;'>
                     <div style='text-align: center;'>
                         <h2 style='color: #0d47a1;'>🌳 Tree View</h2>
                         <p>Load your AI JSON file from the Settings menu in the top-left corner.</p>
