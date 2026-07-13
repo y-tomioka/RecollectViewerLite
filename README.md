@@ -16,7 +16,7 @@ This tool is built as a lightweight companion to the full-featured **[RecollectV
 ## 🚀 Key Features
 *   **🌳 Tree View Visualization:** Navigate your chat history structure effortlessly.
 *   **🔒 100% Local & Private:** Your data stays on your machine. No cloud uploads.
-*   **🌍 Global-Ready:** Designed to work smoothly across different system languages and date formats (ISO 8601).
+*   **🌍 Global-Ready:** Designed to work smoothly across different system languages.
 *   **⚡ Lightweight:** Fast parsing with no unnecessary dependencies. Perfect for quick lookups.
 
 ## ⚖️ Lite vs. Full Version
@@ -35,7 +35,7 @@ RecollectViewer Lite focuses purely on "viewing" Gemini logs. For power users wh
 ## 🛠️ Technical Details
 *   **Language:** C# (.NET Framework)
 *   **Approach:** Built for high-performance parsing of local JSON files.
-*   **Global Compatibility:** Handles path resolutions and date formatting (ISO 8601) regardless of your system's region settings.
+*   **Global Compatibility:** Handles path resolutions smoothly regardless of your system's region settings.
 
 ## 📥 How to Use
 1. Download the latest release from the [Releases page](https://github.com/y-tomioka/RecollectViewerLite/releases).
