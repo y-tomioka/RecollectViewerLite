@@ -63,6 +63,8 @@ RecollectViewer Lite focuses on viewing Gemini logs. For ChatGPT / Claude suppor
 3. Select your Google Takeout Gemini JSON (Takeout → My Activity → Gemini app → JSON).
 4. Browse your chat history in the tree view.
 
+Want a quick try first? After extracting the ZIP, load a JSON file from the bundled sample folder in the app.
+
 > **Requirements:** Windows 10 / 11, .NET Framework 4.7.2+, [WebView2 Runtime](https://developer.microsoft.com/microsoft-edge/webview2/).
 
 ---
